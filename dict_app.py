@@ -32,7 +32,8 @@ def do_you_want_to_use_me_again():
 
 
 def dictionary():
-    f = open("meanings.txt", "a")
+    file = input("Enter the file name with extension to store words you search: ")
+    f = open(file, "a")
     try:
         word = input("Type a word to get its meaning and hit enter: ")
         meaning = dict.meaning(word)
