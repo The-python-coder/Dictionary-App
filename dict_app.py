@@ -1,7 +1,6 @@
 from PyDictionary import PyDictionary
 from difflib import get_close_matches
 from english_words import english_words_alpha_set
-import os
 
 
 word_list = list(english_words_alpha_set)
@@ -32,60 +31,31 @@ def do_you_want_to_use_me_again():
             continue
 
 
-def dictionary(file):
-    if os.path.exists(file):
-        f = open(file, "a")
-        try:
-            word = input("Type a word to get its meaning and hit enter: ")
-            meaning = dict.meaning(word)
-            i = 0
-            f.write("\n")
-            f.write(word + ": \n")
-            for type, definition in meaning.items():
-                f.write(type + ": \n")
-                for m in definition:
-                    i += 1
-                    f.write(f"{i}.{m}\n")
-            f.write("\n")
-            f.write("\n")
-        except:
-            print("Sorry, the word does not exist! Please re-check!")
-    else:
-        yn = input(f"The file does not seem to exist. Do you want to make a file {file}? Y for yes, N for no").upper()
-        if yn == "Y":
-            f = open(file, "w")
-            try:
-                word = input("Type a word to get its meaning and hit enter: ")
-                meaning = dict.meaning(word)
-                i = 0
-                f.write(word + ": \n")
-                for type, definition in meaning.items():
-                    f.write(type + ": \n")
-                    for m in definition:
-                        i += 1
-                        f.write(f"{i}.{m}\n")
-                    f.write("Antonyms: \n")
-                    for j in dict.antonym(word):
-                        i += 1
-                        f.write(f"{i}.{j}, ")
-                    f.write("Synonyms: \n")
-                    for l in dict.synonym(word):
-                        i += 1
-                        f.write(f"{i}.{l}, ")
-                    f.write("\n")
-                f.write("\n")
-            except:
-                print("Sorry, the word does not exist! Please re-check!")
-
+def dictionary():
+    file = input("Enter the file name with extension to store words you search: ")
+    f = open(file, "a")
+    try:
+        word = input("Type a word to get its meaning and hit enter: ")
+        meaning = dict.meaning(word)
+        i = 0
+        f.write(word + ": \n")
+        for type, definition in meaning.items():
+            f.write(type + ": \n")
+            for m in definition:
+                i += 1
+                f.write(f"{i}.{m}\n")
+        f.write("\n")
+        f.write("\n")
+    except:
+        print("Sorry, the word does not exist! Please re-check!")
 
 
 def main():
-    file = input("Enter the file name with extension to store words you search: ")
     while True:
         if do_you_want_to_use_me():
-            dictionary(file)
+            dictionary()
             if do_you_want_to_use_me_again():
-                dictionary(file)
+                dictionary()
             else:
                 print("Have a great day!")
                 break
